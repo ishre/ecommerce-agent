@@ -47,18 +47,15 @@ function Typewriter({ text, onDone }: { text: string; onDone?: () => void }) {
     setDisplayed("");
     if (!text) return;
     const interval = setInterval(() => {
-      setDisplayed((prev) => {
-        const next = text.slice(0, i + 1);
-        if (next.length === text.length) {
-          clearInterval(interval);
-          if (onDone) onDone();
-        }
-        return next;
-      });
+      setDisplayed(text.slice(0, i + 1));
+      if (text.slice(0, i + 1).length === text.length) {
+        clearInterval(interval);
+        if (onDone) onDone();
+      }
       i++;
     }, 18);
     return () => clearInterval(interval);
-  }, [text]);
+  }, [text, onDone]);
 
   // Split displayed text into characters for fade-in
   return (
@@ -143,7 +140,7 @@ export function Chatbot() {
         done = doneReading;
         if (value) {
           buffer += new TextDecoder().decode(value);
-          let lines = buffer.split("\n");
+          const lines = buffer.split("\n");
           buffer = lines.pop() || "";
           for (const line of lines) {
             if (!line.trim()) continue;
@@ -166,7 +163,7 @@ export function Chatbot() {
           }
         }
       }
-    } catch (err) {
+    } catch {
       setMessages((msgs) => [
         ...msgs.slice(0, -1),
         { role: "assistant", content: "Something went wrong." },
@@ -240,7 +237,7 @@ export function Chatbot() {
                         />
                       </div>
                       <span className="break-words">
-                        Try: "My top selling items last month?"
+                        Try: &quot;My top selling items last month?&quot;
                       </span>
                     </button>
                   </div>

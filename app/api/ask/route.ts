@@ -97,7 +97,7 @@ Respond ONLY with a valid SQL SELECT statement, and nothing else. Do not include
           encoder.encode(JSON.stringify({ stage: "done", answer }) + "\n")
         );
         controller.close();
-      } catch (err) {
+      } catch {
         controller.enqueue(
           encoder.encode(
             JSON.stringify({
