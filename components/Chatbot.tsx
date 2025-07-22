@@ -24,7 +24,7 @@ function AILoader({ stage }: { stage: LoadingStage }) {
     color = "text-emerald-700";
   } else if (stage === "explaining") {
     label = "Preparing response…";
-    color = "text-emerald-950";
+    color = "text-emerald-800";
   }
   return (
     <div className={`flex items-center gap-3 px-3 py-2 font-medium ${color}`}>{label}</div>
@@ -177,13 +177,23 @@ export function Chatbot() {
       {/* Floating AI button */}
       {!open && (
         <button
-          className="fixed bottom-6 right-6 z-50 bg-gradient-to-br from-fuchsia-500 via-blue-500 to-green-400 text-white rounded-full shadow-2xl p-4 hover:scale-110 transition-all flex items-center gap-2 focus:outline-none focus:ring-4 focus:ring-blue-300 animate-gradient-x"
+          className="fixed bottom-6 right-6 z-50 p-[6px] rounded-full shadow-2xl hover:scale-105 transition-all focus:outline-none focus:ring-4 focus:ring-blue-300 animate-gradient-x"
           onClick={() => setOpen(true)}
           aria-label="Open AI Chatbot"
-          style={{ backgroundSize: '200% 200%' }}
+          style={{
+            background: "linear-gradient(135deg, #f26e77 0%, #3b82f6 50%, #34d399 100%)",
+            backgroundSize: '200% 200%',
+          }}
         >
-          <Bot className="w-6 h-6 drop-shadow" />
-          <span className="font-bold drop-shadow">Chat with database</span>
+          <span className="flex items-center gap-2 bg-white rounded-full px-4 py-3">
+          <Lottie
+                      animationData={aiStarsAnimation}
+                      loop
+                      autoplay
+                      style={{ width: "30px", height: "30px" }}
+                    /> 
+            <span className="font-bold drop-shadow text-gray-600">Chat With Data</span>
+          </span>
         </button>
       )}
       {/* Popup Chatbot */}
@@ -210,13 +220,13 @@ export function Chatbot() {
             <CardContent>
               <div className="space-y-3 min-h-[300px] max-h-[350px] overflow-y-auto mb-3 bg-white rounded p-2 ">
                 {messages.length === 0 && (
-                  <div className="flex flex-col items-center justify-center py-8 text-center text-gray-400">
+                  <div className="flex flex-col items-center justify-center py-8 text-center text-gray-500">
                     <Bot className="w-12 h-12 mb-3 text-[#f26e77] animate-bounce" />
                     <div className="font-semibold text-lg mb-1">No conversation yet</div>
                     <div className="text-sm mb-2">Ask a question about your e-commerce<br/> data to get started!</div>
                     <button
                       type="button"
-                      className="flex items-center justify-center gap-2 mx-auto mt-3 bg-gradient-to-r from-blue-300 via-purple-400 to-fuchsia-500 text-white rounded-full px-4 py-2 text-[12px] font-semibold shadow transition-all focus:outline-none focus:ring-2 focus:ring-blue-300/60 max-w-full bg-[length:200%_200%] bg-[position:0%_50%] hover:bg-gradient-to-l hover:from-fuchsia-500 hover:via-purple-400 hover:to-blue-300 hover:bg-[position:100%_50%] duration-500"
+                      className="flex -m-4 items-center justify-center gap-1  mt-3 p-[2.5px] rounded-full bg-gradient-to-r from-[#f26e77] via-blue-400 to-[#34d399] shadow-2xl transition-all focus:outline-none focus:ring-4 focus:ring-blue-300/60 max-w-full bg-[length:200%_200%] bg-[position:0%_50%] hover:bg-gradient-to-l hover:from-[#34d399] hover:via-blue-400 hover:to-[#f26e77] hover:bg-[position:100%_50%] duration-1000"
                       style={{
                         boxShadow: "0 2px 8px 0 rgba(80, 0, 120, 0.08)",
                         wordBreak: "break-word",
@@ -228,16 +238,18 @@ export function Chatbot() {
                         if (!loading) handleSend();
                       }}
                     >
-                      <div className="w-6 h-6 mr-1 mb-0.5 flex-shrink-0">
-                        <Lottie
-                          animationData={aiStarsAnimation}
-                          loop
-                          autoplay
-                          style={{ width: "100%", height: "100%" }}
-                        />
-                      </div>
-                      <span className="break-words">
-                        Try: &quot;My top selling items last month?&quot;
+                      <span className="flex items-center justify-center gap-2 bg-white rounded-full px-3 py-1 w-full">
+                        <div className="w-6 h-6 mr-1 mb-0.5 flex-shrink-0">
+                          <Lottie
+                            animationData={aiStarsAnimation}
+                            loop
+                            autoplay
+                            style={{ width: "100%", height: "100%" }}
+                          />
+                        </div>
+                        <span className="text-gray-700 text-[12px] font-semibold">
+                          Try: &quot;My top selling items last month?&quot;
+                        </span>
                       </span>
                     </button>
                   </div>
@@ -295,7 +307,6 @@ export function Chatbot() {
                 ))}
                 {loading && (
                   <div className="flex items-end gap-2 text-left">
-                    <Bot className="w-5 h-5 text-[#f26e77] mb-4" />
                     <div className="flex flex-col max-w-[80%]">
                       <div className="flex items-center gap-1 mb-1">
                         <Badge className="bg-gradient-to-br from-green-400 to-blue-300 text-white border-none shadow font-semibold">AI</Badge>
@@ -333,7 +344,8 @@ export function Chatbot() {
                 <Button
                   type="submit"
                   disabled={loading || !input.trim()}
-                  className="bg-gradient-to-br from-blue-500 via-fuchsia-500 to-green-400 text-white shadow font-bold flex items-center gap-1 px-4 py-2 hover:scale-105 transition-all"
+                  className="bg-gradient-to-br from-indigo-600 via-purple-500 to-pink-500 text-white text- shadow font-bold flex items-center gap-1 px-4 py-2 hover:scale-105 transition-all"
+                  style={{ color: "#fff" }}
                 >
                   <Send className="w-4 h-4 mr-1" />
                   {loading ? "Thinking…" : "Send"}
