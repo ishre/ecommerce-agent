@@ -533,7 +533,7 @@ export function Chatbot() {
                   <Button
                     type="submit"
                     disabled={loading || !input.trim()}
-                    className="rounded-full bg-gradient-to-br from-indigo-600 via-purple-500 to-pink-500 text-white shadow font-bold flex items-center gap-1 px-4 py-2 hover:scale-105 transition-all min-w-[40px] min-h-[40px]"
+                    className="rounded-full bg-gradient-to-br from-indigo-600 via-purple-500 to-pink-500 text-white shadow font-bold flex items-center gap-1 px-1 py-1 hover:scale-105 transition-all min-w-[40px] min-h-[40px]"
                     style={{ color: "#fff" }}
                   >
                     <Send className="w-5 h-5" />
@@ -552,7 +552,7 @@ export function Chatbot() {
                         }`}
                         onClick={() => setVisualMode((v) => !v)}
                       >
-                        <BarChart3 className="w-4 h-4 mr-1" /> Visual Mode
+                        <BarChart3 className="w-4 h-4 mr-1" /> Visualise
                       </button>
                     </TooltipTrigger>
                     <TooltipContent className="bg-white text-gray-800 shadow-lg border border-blue-200 rounded-xl px-4 py-2 text-xs font-medium animate-fade-in">
