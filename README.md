@@ -1,36 +1,146 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Anarix AI – Ecommerce Chatbot
+
+Anarix AI is an interactive AI-powered chatbot for querying your e-commerce data. Built with Next.js, React, and Google Gemini, it enables users to ask natural language questions about their sales, ad performance, and product eligibility, and get instant, conversational answers based on your database.
+
+## Features
+
+- **Conversational AI Chatbot**: Ask questions about your e-commerce data in plain English.
+- **Live SQL Generation**: Uses Google Gemini to convert questions into SQL queries for your Postgres database.
+- **Streaming Responses**: See the AI’s progress as it understands, queries, and explains.
+- **Modern UI**: Beautiful, animated chat interface with Lottie and Tailwind CSS.
+- **Data Privacy**: All queries run on your own database.
+
+## Demo
+
+![Chatbot Screenshot](public/next.svg) <!-- Replace with actual screenshot if available -->
 
 ## Getting Started
 
-First, run the development server:
+### 1. Clone the Repository
+
+```bash
+git clone <your-repo-url>
+cd ecomchat
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+# or
+yarn install
+```
+
+### 3. Environment Variables
+
+Create a `.env.local` file in the root with the following:
+
+```
+DATABASE_URL=postgres://<user>:<password>@<host>:<port>/<db>
+GEMINI_API_KEY=your_google_gemini_api_key
+```
+
+- `DATABASE_URL`: Your Postgres connection string.
+- `GEMINI_API_KEY`: [Get your Gemini API key here](https://ai.google.dev/).
+
+### 4. Database Setup
+
+**Schema:**
+
+The chatbot expects the following tables in your Postgres database:
+
+```sql
+CREATE TABLE ad_sales_metrics (
+  date DATE,
+  item_id INTEGER,
+  ad_sales NUMERIC,
+  impressions INTEGER,
+  ad_spend NUMERIC,
+  clicks INTEGER,
+  units_sold INTEGER
+);
+
+CREATE TABLE total_sales_metrics (
+  date DATE,
+  item_id INTEGER,
+  total_sales NUMERIC,
+  total_units_ordered INTEGER
+);
+
+CREATE TABLE eligibility_table (
+  eligibility_datetime_utc TIMESTAMP,
+  item_id INTEGER,
+  eligibility BOOLEAN,
+  message TEXT
+);
+```
+
+**Importing Data:**
+
+Sample data is provided in the `instructions/data/` directory as CSV files. You can import them using the `\copy` command in `psql`:
+
+```bash
+psql $DATABASE_URL
+# Then, for each table:
+\copy ad_sales_metrics FROM 'instructions/data/Product-Level Ad Sales and Metrics (mapped) - Product-Level Ad Sales and Metrics (mapped).csv' DELIMITER ',' CSV HEADER;
+\copy total_sales_metrics FROM 'instructions/data/Product-Level Total Sales and Metrics (mapped) - Product-Level Total Sales and Metrics (mapped).csv' DELIMITER ',' CSV HEADER;
+\copy eligibility_table FROM 'instructions/data/Product-Level Eligibility Table (mapped) - Product-Level Eligibility Table (mapped).csv' DELIMITER ',' CSV HEADER;
+```
+
+### 5. Run the Development Server
 
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to see the chatbot.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Usage
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Click the floating “Chat with database” button.
+- Ask questions like:
+  - “What were my top selling items last month?”
+  - “How much did I spend on ads last week?”
+  - “Which products are currently ineligible?”
 
-## Learn More
+The AI will:
+1. Understand your question.
+2. Generate and run an SQL query.
+3. Explain the results in plain English.
 
-To learn more about Next.js, take a look at the following resources:
+## Project Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `app/` – Next.js app directory (API, pages, layout)
+- `components/` – React UI components (Chatbot, UI primitives)
+- `lib/` – Database and Gemini API utilities
+- `instructions/data/` – Sample CSV and Excel data
+- `public/` – Static assets (SVGs, Lottie animations)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Tech Stack
 
-## Deploy on Vercel
+- **Next.js** (App Router)
+- **React 19**
+- **Tailwind CSS**
+- **PostgreSQL**
+- **Google Gemini API**
+- **Lottie** (for animations)
+- **shadcn/ui** (for UI primitives)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Customization
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Update the database schema or import your own data as needed.
+- Modify the chatbot prompt in `app/api/ask/route.ts` to tune AI behavior.
+
+## Deployment
+
+Deploy easily on [Vercel](https://vercel.com/) or your preferred platform. Make sure to set the required environment variables.
+
+## License
+
+MIT
+
+---
+
+**Note:** If you need to automate the data import or want a script for it, let me know!
