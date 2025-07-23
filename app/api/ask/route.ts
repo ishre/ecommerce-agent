@@ -109,7 +109,7 @@ Respond ONLY with a valid SQL SELECT statement, and nothing else. Do not include
               raw = raw.replace(/```[a-z]*\n?/i, "").replace(/```$/, "").trim();
             }
             vizSpec = JSON.parse(raw);
-          } catch (e) {
+          } catch (_e) {
             vizSpec = null;
           }
         }

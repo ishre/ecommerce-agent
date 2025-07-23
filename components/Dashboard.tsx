@@ -14,6 +14,8 @@ import {
   Cell,
 } from "recharts";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/ui/table";
+import Lottie from "lottie-react";
+import aiStarsAnimation from "./lottie/AiStars.json";
 
 interface DrilldownRow {
   item_id: string | number;
@@ -28,15 +30,15 @@ interface DrilldownRow {
 
 function KpiCard({ label, value, unit, color, icon }: { label: string; value: string | number; unit?: string; color: string; icon: React.ReactNode }) {
   return (
-    <div className="relative bg-white rounded-2xl shadow-md border border-gray-100 flex flex-col items-start justify-center px-8 py-6 min-h-[120px] group hover:shadow-xl transition-shadow duration-300">
+    <div className="relative bg-white rounded-2xl shadow-md border border-gray-100 flex flex-col items-start justify-center px-5 py-6 min-h-[120px] group hover:shadow-xl transition-shadow duration-300">
       <div className="absolute left-0 top-0 h-full w-1.5 rounded-l-2xl" style={{ background: color }} />
       <div className="flex items-center gap-3 mb-2">
         <span className="text-2xl" style={{ color }}>{icon}</span>
         <span className="text-gray-500 text-xs font-semibold uppercase tracking-wider">{label}</span>
       </div>
       <div className="flex items-end gap-2">
-        <span className="text-3xl font-extrabold text-gray-900">{value}</span>
-        <span className="text-3xl font-medium text-gray-400 ">{unit}</span>
+        <span className="text-2xl font-extrabold text-gray-900">{value}</span>
+        <span className="text-2xl font-medium text-gray-400 ">{unit}</span>
       </div>
     </div>
   );
@@ -179,14 +181,21 @@ export function Dashboard() {
       });
   }, []);
 
-  if (loading) return <div className="text-center py-20 text-lg text-blue-700">Loading dashboard…</div>;
+  if (loading) return (
+    <div className="flex flex-col items-center justify-center py-20 text-lg text-blue-700">
+      <div className="w-32 h-32 mb-4">
+        <Lottie animationData={aiStarsAnimation} loop autoplay style={{ width: "100%", height: "100%" }} />
+      </div>
+      <div className="font-semibold text-xl text-blue-700 animate-pulse">AI is coming…</div>
+    </div>
+  );
   if (error) return <div className="text-center py-20 text-lg text-red-600">{error}</div>;
   if (!data) return null;
 
   return (
-    <div className="w-full min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50 py-8 px-2 md:px-8 flex flex-col gap-12">
+    <div className="w-full min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50 py-8 px-2 md:px-8 flex flex-col gap-5 z-0">
       {/* KPI Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8 mb-2">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-2 mb-2">
         <KpiCard
           label="Total Sales"
           value={Number(data.kpis.totalSales).toLocaleString()}
