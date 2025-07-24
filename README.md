@@ -176,5 +176,3 @@ Deploy easily on [Vercel](https://vercel.com/) or your preferred platform. Make 
 MIT
 
 ---
-
-**Note:** If you need to automate the data import or want a script for it, let me know!
