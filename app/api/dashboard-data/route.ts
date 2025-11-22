@@ -4,125 +4,197 @@ export async function GET() {
   // Log the incoming request
   console.log("[API /api/dashboard-data] Incoming GET request");
   try {
-    // KPIs
-    const kpiSales = await query(`SELECT SUM(total_sales) as total_sales FROM total_sales_metrics`);
-    const kpiAdSales = await query(`SELECT SUM(ad_sales) as total_ad_sales FROM ad_sales_metrics`);
-    const kpiAdSpend = await query(`SELECT SUM(ad_spend) as total_ad_spend FROM ad_sales_metrics`);
-    const roas = Number(kpiAdSales.rows[0]?.total_ad_sales || 0) / (Number(kpiAdSpend.rows[0]?.total_ad_spend || 1));
-    const netProfit = Number(kpiSales.rows[0]?.total_sales || 0) - Number(kpiAdSpend.rows[0]?.total_ad_spend || 0);
+    // KPIs - Total Users
+    const totalUsersResult = await query("users", [
+      { $count: "total" }
+    ]);
+    const totalUsers = totalUsersResult.rows[0]?.total || 0;
+
+    // Total Interviews
+    const totalInterviewsResult = await query("interviews", [
+      { $count: "total" }
+    ]);
+    const totalInterviews = totalInterviewsResult.rows[0]?.total || 0;
+
+    // Total Courses
+    const totalCoursesResult = await query("courses", [
+      { $match: { isPublished: true } },
+      { $count: "total" }
+    ]);
+    const totalCourses = totalCoursesResult.rows[0]?.total || 0;
+
+    // Total Practice Attempts
+    const totalPracticeResult = await query("practicehistories", [
+      { $count: "total" }
+    ]);
+    const totalPractice = totalPracticeResult.rows[0]?.total || 0;
+
+    // Total Revenue (from orders)
+    const revenueResult = await query("orders", [
+      {
+        $group: {
+          _id: null,
+          totalRevenue: { $sum: "$amount" }
+        }
+      }
+    ]);
+    const totalRevenue = revenueResult.rows[0]?.totalRevenue || 0;
+
     // Log KPIs
     console.log("[API /api/dashboard-data] KPIs:", {
-      totalSales: kpiSales.rows[0]?.total_sales || 0,
-      totalAdSales: kpiAdSales.rows[0]?.total_ad_sales || 0,
-      totalAdSpend: kpiAdSpend.rows[0]?.total_ad_spend || 0,
-      roas: roas || 0,
-      netProfit: netProfit || 0,
+      totalUsers,
+      totalInterviews,
+      totalCourses,
+      totalPractice,
+      totalRevenue,
     });
 
-    // Weekly time series
-    const salesAdTime = await query(
-      `SELECT DATE_TRUNC('week', COALESCE(a.date, b.date)) as week,
-        SUM(a.total_sales) as total_sales,
-        SUM(b.ad_sales) as ad_sales,
-        SUM(b.ad_spend) as ad_spend
-      FROM total_sales_metrics a
-      FULL OUTER JOIN ad_sales_metrics b ON a.date = b.date AND a.item_id = b.item_id
-      GROUP BY week ORDER BY week ASC`
-    );
-    // Log salesAdTime
-    console.log("[API /api/dashboard-data] salesAdTime:", salesAdTime.rows);
+    // Users over time (monthly)
+    const usersOverTime = await query("users", [
+      {
+        $group: {
+          _id: {
+            year: { $year: "$createdAt" },
+            month: { $month: "$createdAt" }
+          },
+          count: { $sum: 1 }
+        }
+      },
+      {
+        $sort: { "_id.year": 1, "_id.month": 1 }
+      },
+      {
+        $project: {
+          _id: 0,
+          month: {
+            $dateFromParts: {
+              year: "$_id.year",
+              month: "$_id.month",
+              day: 1
+            }
+          },
+          count: 1
+        }
+      }
+    ]);
 
-    // Top 10 products by ROAS (ROAS = ad_sales/ad_spend)
-    const topProductsByROAS = await query(
-      `SELECT b.item_id,
-        SUM(b.ad_sales) as ad_sales,
-        SUM(b.ad_spend) as ad_spend,
-        CASE WHEN SUM(b.ad_spend) > 0 THEN SUM(b.ad_sales)/SUM(b.ad_spend) ELSE 0 END as roas,
-        SUM(a.total_sales) as total_sales
-      FROM ad_sales_metrics b
-      LEFT JOIN total_sales_metrics a ON a.item_id = b.item_id
-      GROUP BY b.item_id
-      HAVING SUM(b.ad_spend) > 0
-      ORDER BY roas DESC
-      LIMIT 10`
-    );
-    console.log("[API /api/dashboard-data] topProductsByROAS:", topProductsByROAS.rows);
-    // Top 10 by total sales
-    const topProductsBySales = await query(
-      `SELECT item_id, SUM(total_sales) as total_sales
-       FROM total_sales_metrics GROUP BY item_id ORDER BY SUM(total_sales) DESC LIMIT 10`
-    );
-    console.log("[API /api/dashboard-data] topProductsBySales:", topProductsBySales.rows);
-    // Bottom 10 by ROAS (loss-makers)
-    const bottomProductsByROAS = await query(
-      `SELECT b.item_id,
-        SUM(b.ad_sales) as ad_sales,
-        SUM(b.ad_spend) as ad_spend,
-        CASE WHEN SUM(b.ad_spend) > 0 THEN SUM(b.ad_sales)/SUM(b.ad_spend) ELSE 0 END as roas,
-        SUM(a.total_sales) as total_sales
-      FROM ad_sales_metrics b
-      LEFT JOIN total_sales_metrics a ON a.item_id = b.item_id
-      GROUP BY b.item_id
-      HAVING SUM(b.ad_spend) > 0
-      ORDER BY roas ASC
-      LIMIT 10`
-    );
-    console.log("[API /api/dashboard-data] bottomProductsByROAS:", bottomProductsByROAS.rows);
+    // Interviews by status
+    const interviewsByStatus = await query("interviews", [
+      {
+        $group: {
+          _id: "$status",
+          count: { $sum: 1 }
+        }
+      },
+      {
+        $project: {
+          _id: 0,
+          status: "$_id",
+          count: 1
+        }
+      }
+    ]);
 
-    // Eligibility breakdown
-    const eligibilityCounts = await query(
-      `SELECT eligibility, COUNT(*) as count FROM eligibility_table GROUP BY eligibility`
-    );
-    console.log("[API /api/dashboard-data] eligibilityCounts:", eligibilityCounts.rows);
-    const ineligibilityMessages = await query(
-      `SELECT message, COUNT(*) as count FROM eligibility_table WHERE NOT eligibility GROUP BY message ORDER BY count DESC LIMIT 1`
-    );
-    console.log("[API /api/dashboard-data] ineligibilityMessages:", ineligibilityMessages.rows);
+    // Top courses by enrollment (users with course in their course array)
+    const topCourses = await query("users", [
+      { $unwind: { path: "$course", preserveNullAndEmptyArrays: true } },
+      {
+        $group: {
+          _id: "$course",
+          enrollmentCount: { $sum: 1 }
+        }
+      },
+      { $sort: { enrollmentCount: -1 } },
+      { $limit: 10 },
+      {
+        $lookup: {
+          from: "courses",
+          localField: "_id",
+          foreignField: "_id",
+          as: "courseData"
+        }
+      },
+      { $unwind: { path: "$courseData", preserveNullAndEmptyArrays: true } },
+      {
+        $project: {
+          _id: 0,
+          courseId: "$_id",
+          courseName: "$courseData.name",
+          enrollmentCount: 1
+        }
+      }
+    ]);
 
-    // Ad performance by week (CTR, Conversion)
-    const adPerfByWeek = await query(
-      `SELECT DATE_TRUNC('week', date) as week,
-        SUM(clicks) as clicks,
-        SUM(impressions) as impressions,
-        SUM(units_sold) as units_sold,
-        CASE WHEN SUM(impressions) > 0 THEN SUM(clicks)::float/SUM(impressions) ELSE 0 END as ctr,
-        CASE WHEN SUM(clicks) > 0 THEN SUM(units_sold)::float/SUM(clicks) ELSE 0 END as conversion
-      FROM ad_sales_metrics
-      GROUP BY week ORDER BY week ASC`
-    );
-    console.log("[API /api/dashboard-data] adPerfByWeek:", adPerfByWeek.rows);
+    // Practice performance (average scores)
+    const practicePerformance = await query("practicehistories", [
+      {
+        $group: {
+          _id: null,
+          avgScore: { $avg: "$score" },
+          totalAttempts: { $sum: 1 },
+          avgCorrectAnswers: { $avg: "$correctAnswers" },
+          avgIncorrectAnswers: { $avg: "$incorrectAnswers" }
+        }
+      }
+    ]);
 
-    // Drill-down table (all relevant columns, top 100 for perf)
-    const drilldown = await query(
-      `SELECT b.item_id, SUM(b.ad_spend) as ad_spend, SUM(b.ad_sales) as ad_sales, SUM(b.impressions) as impressions, SUM(b.clicks) as clicks, SUM(b.units_sold) as units_sold,
-        CASE WHEN SUM(b.ad_spend) > 0 THEN SUM(b.ad_sales)/SUM(b.ad_spend) ELSE 0 END as roas,
-        BOOL_OR(e.eligibility) as eligibility
-      FROM ad_sales_metrics b
-      LEFT JOIN eligibility_table e ON e.item_id = b.item_id
-      GROUP BY b.item_id
-      ORDER BY SUM(b.ad_spend) DESC
-      LIMIT 100`
-    );
-    console.log("[API /api/dashboard-data] drilldown:", drilldown.rows);
+    // Recent activity (last 7 days)
+    const recentActivity = await query("users", [
+      {
+        $match: {
+          createdAt: {
+            $gte: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
+          }
+        }
+      },
+      {
+        $group: {
+          _id: {
+            $dateToString: { format: "%Y-%m-%d", date: "$createdAt" }
+          },
+          count: { $sum: 1 }
+        }
+      },
+      { $sort: { _id: 1 } },
+      {
+        $project: {
+          _id: 0,
+          date: "$_id",
+          count: 1
+        }
+      }
+    ]);
+
+    // Drill-down: User details with course enrollment
+    const drilldown = await query("users", [
+      {
+        $project: {
+          _id: 1,
+          name: 1,
+          email: 1,
+          role: 1,
+          courseCount: { $size: { $ifNull: ["$course", []] } },
+          createdAt: 1
+        }
+      },
+      { $sort: { createdAt: -1 } },
+      { $limit: 100 }
+    ]);
 
     // Log the final response
     const responseObj = {
       kpis: {
-        totalSales: kpiSales.rows[0]?.total_sales || 0,
-        totalAdSales: kpiAdSales.rows[0]?.total_ad_sales || 0,
-        totalAdSpend: kpiAdSpend.rows[0]?.total_ad_spend || 0,
-        roas: roas || 0,
-        netProfit: netProfit || 0,
+        totalUsers,
+        totalInterviews,
+        totalCourses,
+        totalPractice,
+        totalRevenue,
       },
-      salesAdTime: salesAdTime.rows,
-      topProductsByROAS: topProductsByROAS.rows,
-      topProductsBySales: topProductsBySales.rows,
-      bottomProductsByROAS: bottomProductsByROAS.rows,
-      eligibility: {
-        counts: eligibilityCounts.rows,
-        topMessage: ineligibilityMessages.rows[0]?.message || null,
-      },
-      adPerfByWeek: adPerfByWeek.rows,
+      usersOverTime: usersOverTime.rows,
+      interviewsByStatus: interviewsByStatus.rows,
+      topCourses: topCourses.rows,
+      practicePerformance: practicePerformance.rows[0] || {},
+      recentActivity: recentActivity.rows,
       drilldown: drilldown.rows,
     };
     console.log("[API /api/dashboard-data] Final response:", responseObj);
@@ -137,4 +209,4 @@ export async function GET() {
       { status: 500, headers: { "Content-Type": "application/json" } }
     );
   }
-} 
+}

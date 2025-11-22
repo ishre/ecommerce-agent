@@ -1,0 +1,1316 @@
+[
+  {
+    "collection": "collegeteams",
+    "count": 159,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "name": "string",
+      "collegeid": "object",
+      "studyclass": "string",
+      "standard": "string",
+      "year": "string",
+      "students": "array",
+      "interview": "array",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "__v": "number",
+      "course": "array",
+      "academicYear": "string",
+      "status": "boolean",
+      "bundle": "array"
+    }
+  },
+  {
+    "collection": "sections",
+    "count": 15295,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "sectionID": "string",
+      "sectionName": "string",
+      "chapter": "array",
+      "dripBy": "object",
+      "availableAt": "date",
+      "availableAfterDays": "number",
+      "availableAfterWeeks": "number",
+      "activeDate": "null",
+      "__v": "number"
+    }
+  },
+  {
+    "collection": "course_lists",
+    "count": 0,
+    "empty": true,
+    "schema": {}
+  },
+  {
+    "collection": "examhistories",
+    "count": 11,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "userId": "object",
+      "examId": "object",
+      "totalQuestions": "number",
+      "totalMarks": "number",
+      "correctAnswers": "number",
+      "incorrectAnswers": "number",
+      "unattempted": "number",
+      "score": "number",
+      "totalTime": "number",
+      "timeTaken": "number",
+      "userAnswers": "array",
+      "attemptedAt": "date",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "__v": "number"
+    }
+  },
+  {
+    "collection": "password_reset_tokens",
+    "count": 0,
+    "empty": true,
+    "schema": {}
+  },
+  {
+    "collection": "trailresumes",
+    "count": 3733,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "user": "object",
+      "name": "string",
+      "template": "string",
+      "color": "string",
+      "profession": "string",
+      "jobProfile": "string",
+      "desiredCompany": "string",
+      "currentStepNumber": "number",
+      "contact": "object",
+      "experiences": "array",
+      "education": "array",
+      "certification": "array",
+      "involvement": "array",
+      "skills": "array",
+      "hobby": "array",
+      "summary": "string",
+      "completeness": "number",
+      "formatting": "number",
+      "wordChoice": "number",
+      "clearContactInfo": "number",
+      "atsCompliance": "number",
+      "optimization": "number",
+      "strongSummary": "number",
+      "noTypos": "number",
+      "length": "number",
+      "projects": "array",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "__v": "number",
+      "achievements": "array",
+      "languagesKnown": "array",
+      "links": "array",
+      "language": "array",
+      "researchPapers": "array"
+    }
+  },
+  {
+    "collection": "questions",
+    "count": 0,
+    "empty": true,
+    "schema": {}
+  },
+  {
+    "collection": "aptisubcategories",
+    "count": 246,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "category": "object",
+      "name": "string",
+      "description": "string",
+      "time": "number",
+      "questions": "array",
+      "numberOfPracticeQuestions": "number",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "__v": "number",
+      "status": "string"
+    }
+  },
+  {
+    "collection": "interview_results",
+    "count": 615,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "interview_id": "object",
+      "results": "array",
+      "attemptedby_id": "object",
+      "attempt_type": "string",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "__v": "number"
+    }
+  },
+  {
+    "collection": "aptiquestions",
+    "count": 23216,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "question": "string",
+      "options": "array",
+      "hint": "string",
+      "answer": "string",
+      "answerExplanation": "string",
+      "time": "number",
+      "tags": "array",
+      "questionType": "string",
+      "difficulty": "string",
+      "marks": "number",
+      "negativeMarks": "number",
+      "validatedByAI": "boolean",
+      "requiresHumanReview": "boolean",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "__v": "number",
+      "section": "string",
+      "category": "object",
+      "subcategory": "object"
+    }
+  },
+  {
+    "collection": "automatedresumes",
+    "count": 0,
+    "empty": true,
+    "schema": {}
+  },
+  {
+    "collection": "aptinotifications",
+    "count": 0,
+    "empty": true,
+    "schema": {}
+  },
+  {
+    "collection": "forms",
+    "count": 1625,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "college": "string",
+      "batch": "string",
+      "name": "string",
+      "email": "string",
+      "phone": "string",
+      "className": "string",
+      "rollNo": "string",
+      "timestamp": "date",
+      "__v": "number"
+    }
+  },
+  {
+    "collection": "settings",
+    "count": 1,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "__v": "number",
+      "analysisApiUrl": "string",
+      "createdAt": "date",
+      "maxInterviews": "number",
+      "updatedAt": "date"
+    }
+  },
+  {
+    "collection": "all_users",
+    "count": 2,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "account_email": "string",
+      "account_phone": "number",
+      "account_type": "string",
+      "__v": "number"
+    }
+  },
+  {
+    "collection": "covertemplates",
+    "count": 0,
+    "empty": true,
+    "schema": {}
+  },
+  {
+    "collection": "teams",
+    "count": 74,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "teamName": "string",
+      "courses": "array",
+      "createAt": "date",
+      "upladedAt": "date",
+      "teamMembers": "array",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "__v": "number"
+    }
+  },
+  {
+    "collection": "freshercoverletters",
+    "count": 736,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "user": "object",
+      "template": "string",
+      "color": "string",
+      "currentStepNumber": "number",
+      "targetJob": "object",
+      "from": "object",
+      "to": "object",
+      "experiences": "array",
+      "projects": "array",
+      "education": "array",
+      "certification": "array",
+      "involvement": "array",
+      "content": "string",
+      "completeness": "number",
+      "formatting": "number",
+      "wordChoice": "number",
+      "strongSummary": "number",
+      "optimization": "number",
+      "noTypos": "number",
+      "length": "number",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "__v": "number",
+      "atsCompliance": "number",
+      "clearContactInfo": "number"
+    }
+  },
+  {
+    "collection": "configs",
+    "count": 0,
+    "empty": true,
+    "schema": {}
+  },
+  {
+    "collection": "carts",
+    "count": 0,
+    "empty": true,
+    "schema": {}
+  },
+  {
+    "collection": "practiceresults",
+    "count": 1,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "user": "object",
+      "practice": "array",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "__v": "number"
+    }
+  },
+  {
+    "collection": "progresstracks",
+    "count": 516,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "userId": "object",
+      "courseId": "object",
+      "chapterId": "object",
+      "totalWatchedTime": "number",
+      "isCompleted": "boolean",
+      "isStarted": "boolean",
+      "isLocked": "boolean",
+      "lastPlayedVideo": "mixed",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "__v": "number"
+    }
+  },
+  {
+    "collection": "contactmessages",
+    "count": 4,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "name": "string",
+      "email": "string",
+      "subject": "string",
+      "message": "string",
+      "status": "string",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "__v": "number"
+    }
+  },
+  {
+    "collection": "jrsattempts",
+    "count": 1865,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "user": "object",
+      "attemptNumber": "number",
+      "scores": "object",
+      "aptitude": "object",
+      "userDetails": "object",
+      "toolStatus": "object",
+      "resumeQA": "array",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "__v": "number",
+      "interviewId": "object",
+      "aptitudeFeedback": "object",
+      "softSkillsFeedback": "object",
+      "technicalFeedback": "object",
+      "resumeFileUrl": "string"
+    }
+  },
+  {
+    "collection": "examstructures",
+    "count": 16,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "exam": "object",
+      "companyCategory": "array",
+      "subcategorySettings": "array",
+      "totalQuestions": "number",
+      "createdBy": "null",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "__v": "number"
+    }
+  },
+  {
+    "collection": "apticompanies",
+    "count": 151,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "name": "string",
+      "website": "string",
+      "logoUrl": "string",
+      "industry": "string",
+      "headquarters": "string",
+      "foundedYear": "number",
+      "employeeCount": "number",
+      "averageCTC": "number",
+      "rolesOffered": "array",
+      "exams": "array",
+      "isActive": "boolean",
+      "createdAt": "date",
+      "__v": "number",
+      "description": "string"
+    }
+  },
+  {
+    "collection": "streams",
+    "count": 5,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "name": "string",
+      "image": "string",
+      "isPublished": "boolean",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "__v": "number"
+    }
+  },
+  {
+    "collection": "courses",
+    "count": 30,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "name": "string",
+      "date": "date",
+      "courseStarted": "boolean",
+      "startedDate": "date",
+      "isTool": "boolean",
+      "liveSession": "array",
+      "dripBy": "object",
+      "availableAt": "date",
+      "availableAfterDays": "number",
+      "availableAfterWeeks": "number",
+      "section": "array",
+      "isPublished": "boolean",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "__v": "number",
+      "category": "string",
+      "description": "string",
+      "price": "number",
+      "thumbnail": "string",
+      "order": "number",
+      "isCounselling": "boolean",
+      "videoLink1": "string",
+      "videoLink2": "string",
+      "slug": "string",
+      "about": "string",
+      "thumnailUrl": "string",
+      "language": "string",
+      "accessCode": "boolean"
+    }
+  },
+  {
+    "collection": "published_courses",
+    "count": 0,
+    "empty": true,
+    "schema": {}
+  },
+  {
+    "collection": "expcoverletters",
+    "count": 173,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "user": "object",
+      "template": "string",
+      "color": "string",
+      "currentStepNumber": "number",
+      "targetJob": "object",
+      "from": "object",
+      "to": "object",
+      "content": "string",
+      "experiences": "string",
+      "education": "object",
+      "skills": "array",
+      "completeness": "number",
+      "formatting": "number",
+      "wordChoice": "number",
+      "strongSummary": "number",
+      "optimization": "number",
+      "noTypos": "number",
+      "length": "number",
+      "projects": "array",
+      "certification": "array",
+      "involvement": "array",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "__v": "number",
+      "atsCompliance": "number",
+      "clearContactInfo": "number"
+    }
+  },
+  {
+    "collection": "interviewvideos",
+    "count": 2351,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "interview_id": "string",
+      "result_id": "string",
+      "question": "string",
+      "video": "string",
+      "body": "null",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "__v": "number"
+    }
+  },
+  {
+    "collection": "favpractises",
+    "count": 3,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "user": "object",
+      "favs": "array",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "__v": "number"
+    }
+  },
+  {
+    "collection": "questiontypes",
+    "count": 0,
+    "empty": true,
+    "schema": {}
+  },
+  {
+    "collection": "reviews",
+    "count": 0,
+    "empty": true,
+    "schema": {}
+  },
+  {
+    "collection": "assessmentresults",
+    "count": 16,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "userId": "object",
+      "chapterId": "object",
+      "sectionId": "string",
+      "answers": "array",
+      "score": "number",
+      "maxScore": "number",
+      "passingScore": "number",
+      "numberOfAttempts": "number",
+      "attemptDate": "date",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "__v": "number"
+    }
+  },
+  {
+    "collection": "livesessions",
+    "count": 0,
+    "empty": true,
+    "schema": {}
+  },
+  {
+    "collection": "students",
+    "count": 0,
+    "empty": true,
+    "schema": {}
+  },
+  {
+    "collection": "jdschemas",
+    "count": 3,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "title": "string",
+      "description": "string",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "__v": "number"
+    }
+  },
+  {
+    "collection": "aptiexams",
+    "count": 3,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "title": "string",
+      "description": "string",
+      "role": "string",
+      "company": "object",
+      "createdBy": "null",
+      "categories": "array",
+      "subcategories": "array",
+      "questions": "array",
+      "totalMarks": "number",
+      "duration": "number",
+      "isActive": "boolean",
+      "visibility": "string",
+      "createdAt": "date",
+      "__v": "number"
+    }
+  },
+  {
+    "collection": "admins",
+    "count": 2,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "name": "string",
+      "role": "string",
+      "email": "string",
+      "password": "string",
+      "__v": "number",
+      "isadmin": "boolean",
+      "firstname": "string",
+      "lastname": "string",
+      "phoneNumber": "string",
+      "createdAt": "date",
+      "updatedAt": "date"
+    }
+  },
+  {
+    "collection": "interviewquestions",
+    "count": 21970,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "questiontype": "string",
+      "question": "string",
+      "suggestedAnswer": "string",
+      "questionId": "string",
+      "duration": "number",
+      "keyword": "array",
+      "videoQuestion": "string",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "__v": "number",
+      "modeofanswer": "string",
+      "modeofquestion": "string",
+      "audioUrls": "object"
+    }
+  },
+  {
+    "collection": "coupons",
+    "count": 6,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "couponCode": "string",
+      "numberofAllowed": "number",
+      "discountType": "string",
+      "couponCurrency": "string",
+      "discountValue": "mixed",
+      "validFrom": "mixed",
+      "validTo": "mixed",
+      "couponAppliedFor": "array",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "__v": "number"
+    }
+  },
+  {
+    "collection": "chapters",
+    "count": 34582,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "chapterID": "number",
+      "name": "string",
+      "chapterName": "string",
+      "videoLink": "string",
+      "pdfLink": "string",
+      "activeDate": "null",
+      "html": "string",
+      "css": "string",
+      "section": "number",
+      "watched": "boolean",
+      "assessment": "array",
+      "otherFile": "string",
+      "availableAt": "date",
+      "availableAfterDays": "number",
+      "availableAfterWeeks": "number",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "__v": "number",
+      "url": "string"
+    }
+  },
+  {
+    "collection": "subcategories",
+    "count": 0,
+    "empty": true,
+    "schema": {}
+  },
+  {
+    "collection": "supports",
+    "count": 71,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "name": "string",
+      "email": "string",
+      "phone": "string",
+      "message": "string",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "__v": "number"
+    }
+  },
+  {
+    "collection": "apticategories",
+    "count": 20,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "name": "string",
+      "description": "string",
+      "timeToComplete": "number",
+      "icon": "string",
+      "subcategories": "array",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "__v": "number",
+      "status": "string"
+    }
+  },
+  {
+    "collection": "notifications",
+    "count": 837,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "student": "object",
+      "title": "string",
+      "body": "string",
+      "type": "string",
+      "interviewId": "object",
+      "resultId": "object",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "__v": "number",
+      "interviewee": "object",
+      "corporate": "object"
+    }
+  },
+  {
+    "collection": "resumewithais",
+    "count": 2,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "user": "object",
+      "name": "string",
+      "template": "string",
+      "color": "string",
+      "profession": "string",
+      "jobProfile": "string",
+      "desiredCompany": "string",
+      "currentStepNumber": "number",
+      "contact": "object",
+      "experiences": "array",
+      "education": "array",
+      "certification": "array",
+      "involvement": "array",
+      "skills": "array",
+      "hobby": "array",
+      "summary": "string",
+      "completeness": "number",
+      "formatting": "number",
+      "wordChoice": "number",
+      "clearContactInfo": "number",
+      "atsCompliance": "number",
+      "strongSummary": "number",
+      "optimization": "number",
+      "noTypos": "number",
+      "length": "number",
+      "projects": "array",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "__v": "number"
+    }
+  },
+  {
+    "collection": "counsellers",
+    "count": 78,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "name": "string",
+      "email": "string",
+      "phone": "string",
+      "message": "string",
+      "course": "string",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "__v": "number"
+    }
+  },
+  {
+    "collection": "colleges",
+    "count": 38,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "email": "string",
+      "collegename": "string",
+      "phoneNumber": "string",
+      "password": "string",
+      "status": "boolean",
+      "notifications": "array",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "__v": "number",
+      "templateNos": "array",
+      "profileImg": "string",
+      "city": "string",
+      "state": "string"
+    }
+  },
+  {
+    "collection": "sectionquestions",
+    "count": 3,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "question": "string",
+      "questionImage": "string",
+      "stream_id": "object",
+      "section_id": "object",
+      "points": "mixed",
+      "time": "mixed",
+      "questionType": "string",
+      "options": "array",
+      "answers": "array",
+      "hint": "string",
+      "explanation": "string",
+      "detailedExplanation": "array",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "__v": "number"
+    }
+  },
+  {
+    "collection": "jrshistories",
+    "count": 0,
+    "empty": true,
+    "schema": {}
+  },
+  {
+    "collection": "courseenquiries",
+    "count": 67,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "course": "string",
+      "name": "string",
+      "email": "string",
+      "phone": "string",
+      "message": "string",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "__v": "number"
+    }
+  },
+  {
+    "collection": "skills",
+    "count": 833,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "creatorid": "object",
+      "skilltype": "string",
+      "skills": "string",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "__v": "number"
+    }
+  },
+  {
+    "collection": "accesscodes",
+    "count": 0,
+    "empty": true,
+    "schema": {}
+  },
+  {
+    "collection": "temproryquestiontables",
+    "count": 9,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "status": "string",
+      "questions": "array",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "__v": "number",
+      "error": "string",
+      "subcategory": "object"
+    }
+  },
+  {
+    "collection": "resources",
+    "count": 2,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "title": "string",
+      "type": "string",
+      "duration": "string",
+      "author": "string",
+      "description": "string",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "__v": "number"
+    }
+  },
+  {
+    "collection": "streamsections",
+    "count": 3,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "stream_id": "object",
+      "sectionName": "string",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "__v": "number"
+    }
+  },
+  {
+    "collection": "users",
+    "count": 10686,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "name": "string",
+      "role": "string",
+      "email": "string",
+      "password": "string",
+      "phoneNumber": "string",
+      "designation": "string",
+      "education": "array",
+      "cart": "array",
+      "workExperience": "array",
+      "course": "array",
+      "__v": "number",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "serialNumber": "number",
+      "crm": "array",
+      "firstname": "string",
+      "hireProRole": "string",
+      "lastname": "string",
+      "active": "boolean",
+      "aicredits": "number",
+      "interviewResults": "array",
+      "linkedin": "string",
+      "resume": "string",
+      "teams": "array"
+    }
+  },
+  {
+    "collection": "payments",
+    "count": 6,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "date": "date",
+      "lastDate": "date",
+      "amount": "string",
+      "plan": "object",
+      "planType": "string",
+      "user": "object",
+      "name": "string",
+      "planName": "string",
+      "orderId": "string",
+      "transactionId": "string",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "__v": "number"
+    }
+  },
+  {
+    "collection": "resumetemplates",
+    "count": 0,
+    "empty": true,
+    "schema": {}
+  },
+  {
+    "collection": "assessments",
+    "count": 0,
+    "empty": true,
+    "schema": {}
+  },
+  {
+    "collection": "practices",
+    "count": 6,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "title": "string",
+      "description": "string",
+      "subtitle": "string",
+      "video": "string",
+      "thumbnail": "string",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "__v": "number"
+    }
+  },
+  {
+    "collection": "interviews",
+    "count": 3026,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "creator_type": "string",
+      "creatorID": "object",
+      "company": "string",
+      "icon": "string",
+      "companyDescription": "string",
+      "jobarea": "string",
+      "jobcategory": "string",
+      "jobcity": "string",
+      "jobtitle": "string",
+      "jobdescription": "string",
+      "domain": "string",
+      "joblocation": "string",
+      "jobtype": "string",
+      "expirydate": "date",
+      "experience": "mixed",
+      "interviewquestions": "array",
+      "documents": "array",
+      "draft": "boolean",
+      "status": "string",
+      "preparationQue": "string",
+      "questions": "array",
+      "skills": "array",
+      "skillassessments": "array",
+      "isexpiry": "boolean",
+      "interviewResult": "array",
+      "teams": "array",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "__v": "number",
+      "collegeid": "array",
+      "candidates": "array"
+    }
+  },
+  {
+    "collection": "orders",
+    "count": 321,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "__v": "mixed",
+      "amount": "number",
+      "courseId": "mixed",
+      "courseName": "string",
+      "createdAt": "date",
+      "currency": "string",
+      "razorpay_order_id": "string",
+      "razorpay_payment_id": "string",
+      "razorpay_signature": "string",
+      "updatedAt": "date",
+      "userId": "object",
+      "orderId": "string",
+      "status": "string",
+      "reason": "string",
+      "receipt": "string"
+    }
+  },
+  {
+    "collection": "corporates",
+    "count": 6,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "email": "string",
+      "company": "string",
+      "firstname": "string",
+      "lastname": "string",
+      "profileImg": "string",
+      "jobposting": "number",
+      "phoneNumber": "string",
+      "password": "string",
+      "status": "boolean",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "__v": "number"
+    }
+  },
+  {
+    "collection": "appliedcandidates",
+    "count": 55,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "interviewId": "object",
+      "creatorID": "string",
+      "interviewee": "object",
+      "status": "string",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "__v": "number",
+      "resultId": "object"
+    }
+  },
+  {
+    "collection": "questionpapers",
+    "count": 6,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "name": "string",
+      "stream_id": "object",
+      "paperType": "string",
+      "format": "string",
+      "section_id": "array",
+      "questions": "array",
+      "multiSection": "array",
+      "points": "number",
+      "time": "mixed",
+      "remarks": "array",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "__v": "number"
+    }
+  },
+  {
+    "collection": "skilltypes",
+    "count": 35,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "skilltype": "string",
+      "skills": "array",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "__v": "number"
+    }
+  },
+  {
+    "collection": "questionpaperresults",
+    "count": 12,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "name": "string",
+      "mode": "string",
+      "stream_id": "object",
+      "format": "string",
+      "section_id": "array",
+      "questions": "array",
+      "multiSection": "array",
+      "points": "number",
+      "time": "number",
+      "studentTime": "number",
+      "remarks": "array",
+      "studentRemarks": "string",
+      "user": "object",
+      "paperId": "object",
+      "totalQues": "number",
+      "totalMarks": "number",
+      "studentMarks": "number",
+      "attemptedQuestions": "number",
+      "unattemptedQuestions": "number",
+      "correctQuestions": "number",
+      "incorrectQuestions": "number",
+      "multiSectionResult": "array",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "__v": "number"
+    }
+  },
+  {
+    "collection": "categories",
+    "count": 5,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "name": "string",
+      "description": "string",
+      "subcategory": "array",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "__v": "number",
+      "timeToComplete": "string",
+      "icon": "string",
+      "subcategories": "array"
+    }
+  },
+  {
+    "collection": "skillassessments",
+    "count": 0,
+    "empty": true,
+    "schema": {}
+  },
+  {
+    "collection": "bundles",
+    "count": 1,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "name": "string",
+      "description": "string",
+      "date": "date",
+      "price": "number",
+      "course": "array",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "__v": "number"
+    }
+  },
+  {
+    "collection": "feedbacks",
+    "count": 14,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "email": "string",
+      "firstname": "string",
+      "lastname": "string",
+      "phoneNumber": "string",
+      "rating": "number",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "__v": "number"
+    }
+  },
+  {
+    "collection": "plans",
+    "count": 1,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "name": "string",
+      "aicredits": "string",
+      "price": "string",
+      "isAnnual": "boolean",
+      "totalResume": "number",
+      "totalCover": "number",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "__v": "number"
+    }
+  },
+  {
+    "collection": "collabrations",
+    "count": 46,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "schoolOrCollege": "string",
+      "name": "string",
+      "email": "string",
+      "phone": "string",
+      "message": "string",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "__v": "number"
+    }
+  },
+  {
+    "collection": "ailogs",
+    "count": 13104,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "credit": "number",
+      "used": "string",
+      "user": "object",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "__v": "number"
+    }
+  },
+  {
+    "collection": "uploadcoverletters",
+    "count": 0,
+    "empty": true,
+    "schema": {}
+  },
+  {
+    "collection": "practicehistories",
+    "count": 17,
+    "empty": false,
+    "schema": {
+      "_id": "object",
+      "user": "object",
+      "category": "object",
+      "subcategory": "mixed",
+      "totalQuestions": "number",
+      "totalMarks": "number",
+      "correctAnswers": "number",
+      "incorrectAnswers": "number",
+      "unattempted": "number",
+      "timeTaken": "number",
+      "totalTime": "number",
+      "score": "number",
+      "userAnswers": "array",
+      "attemptedAt": "date",
+      "createdAt": "date",
+      "updatedAt": "date",
+      "__v": "number"
+    }
+  }
+]
