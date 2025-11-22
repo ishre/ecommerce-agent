@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import { Dashboard } from "../components/Dashboard";
 import { Chatbot } from "../components/Chatbot";
 import { AppSidebar } from "@/components/app-sidebar";
 import {
@@ -46,8 +45,7 @@ export default function Home() {
             </BreadcrumbList>
           </Breadcrumb>
         </header>
-        
-          <Dashboard />
+
           <Chatbot />
         
        
