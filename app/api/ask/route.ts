@@ -3,11 +3,20 @@ import { askGemini } from "@/lib/gemini";
 import { query } from "@/lib/db";
 
 export async function POST(req: NextRequest) {
+  // Log the incoming request
+  console.log("[API /api/ask] Incoming POST request");
+  let requestBody: any = null;
+  try {
+    requestBody = await req.clone().json();
+    console.log("[API /api/ask] Request body:", requestBody);
+  } catch (e) {
+    console.log("[API /api/ask] Failed to parse request body");
+  }
   const encoder = new TextEncoder();
   const stream = new ReadableStream({
     async start(controller) {
       try {
-        const { question, visualMode, model } = await req.json();
+        const { question, visualMode, model } = requestBody || (await req.json());
         if (!question) {
           controller.enqueue(
             encoder.encode(
@@ -54,6 +63,8 @@ Respond ONLY with a valid SQL SELECT statement, and nothing else. Do not include
         const geminiRes = await askGemini(prompt, model || 'flash');
         let sql =
           geminiRes?.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || "";
+        // Log the generated SQL
+        console.log("[API /api/ask] Generated SQL:", sql);
         if (sql.startsWith("```")) {
           sql = sql
             .replace(/```[a-z]*\n?/i, "")
@@ -76,6 +87,8 @@ Respond ONLY with a valid SQL SELECT statement, and nothing else. Do not include
         // Run the SQL query
         const result = await query(sql);
         const rows = result.rows;
+        // Log the SQL result
+        console.log("[API /api/ask] SQL result:", rows);
 
         // Stage 3: Explaining
         controller.enqueue(
@@ -93,6 +106,8 @@ Respond ONLY with a valid SQL SELECT statement, and nothing else. Do not include
         const answer =
           explainRes?.candidates?.[0]?.content?.parts?.[0]?.text?.trim() ||
           "Sorry, I could not generate an answer.";
+        // Log the final answer
+        console.log("[API /api/ask] Final answer:", answer);
 
         let vizSpec = null;
         if (visualMode) {
@@ -112,13 +127,17 @@ Respond ONLY with a valid SQL SELECT statement, and nothing else. Do not include
           } catch (_e) {
             vizSpec = null;
           }
+          // Log the visualization spec
+          console.log("[API /api/ask] Visualization spec:", vizSpec);
         }
 
         controller.enqueue(
           encoder.encode(JSON.stringify({ stage: "done", answer, vizSpec }) + "\n")
         );
         controller.close();
-      } catch {
+      } catch (err) {
+        // Log the error
+        console.error("[API /api/ask] Internal server error:", err);
         controller.enqueue(
           encoder.encode(
             JSON.stringify({
