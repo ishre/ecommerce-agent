@@ -23,8 +23,8 @@ import { Switch } from "@/components/ui/switch"
 // This is sample data
 const data = {
   user: {
-    name: "shadcn",
-    email: "m@example.com",
+    name: "Admin",
+    email: "shreyash@viosa.in",
     avatar: "/avatars/shadcn.jpg",
   },
   navMain: [

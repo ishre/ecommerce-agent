@@ -394,8 +394,8 @@ export function Chatbot() {
                       No conversation yet
                     </div>
                     <div className="text-sm mb-2">
-                      Ask a question about your e-commerce
-                      <br /> data to get started!
+                      Ask a question about students, interviews,
+                      <br /> courses, or performance data!
                     </div>
                     <button
                       type="button"
@@ -407,7 +407,7 @@ export function Chatbot() {
                         lineHeight: 1.3,
                       }}
                       onClick={() => {
-                        setInput("What were my top selling items last month?");
+                        setInput("Who is Ajay Shah?");
                         if (!loading) handleSend();
                       }}
                     >
@@ -421,7 +421,7 @@ export function Chatbot() {
                           />
                         </div>
                         <span className="text-gray-700 text-[12px] font-semibold">
-                          Try: &quot;My top selling items last month?&quot;
+                          Try: &quot;Who is Ajay Shah?&quot;
                         </span>
                       </span>
                     </button>
